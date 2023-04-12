@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import BlogList from "./BlogList";
 import Navbar from "./Navbar";
 import Login from "./Login";
 
 function App() {
   const [user, setUser] = useState(null);
+  // const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     // auto-login
@@ -16,20 +17,27 @@ function App() {
     });
   }, [])
 
+//   useEffect(() => {
+//     fetch("/blogs")
+//     .then((resp) => resp.json())
+//     .then(setPosts);
+// }, []);
+
+  // const handleAddPost = (newPost) => {
+  //   setPosts([...posts, newPost]);
+  // }
+
   if (!user) return <Login onLogin={setUser} />
 
   return (
     <>
-    <BrowserRouter>
     <Navbar user={user} setUser={setUser} />
       <div className="App">
         <Switch>
-          <Route path="/">
-            <BlogList user={user} />
-          </Route>
+          <Route exact path="/"><BlogList user={user} /></Route>
+          {/* <Route exact path="/create"><NewPost onAddPost={handleAddPost} /></Route> */}
         </Switch>
       </div>
-    </BrowserRouter>
     </>
   );
 }
