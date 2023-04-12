@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
     def create
         blog = @current_user.blogs.find_by(id: params[:blog_id])
         if blog
-            comment = Comment.create(comment_params)
+            comment = Comment.create!(comment_params)
             render json: comment, status: 201
         else
             render json: { errors: comment.errors.full_messages }, status: 422
@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
     private
 
     def comment_params
-        params.permit(:reply, :blog_id)
+        params.permit(:reply, :blog_id, :user_id)
     end
 
 end
