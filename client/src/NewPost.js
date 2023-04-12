@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function NewPost({onAddPost}) {
+function NewPost({onAddPost, user}) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 
@@ -8,7 +8,8 @@ function NewPost({onAddPost}) {
         e.preventDefault();
         const newPost = {
             title: title,
-            description: description
+            description: description,
+            user_id: user.id
         }
         fetch("/blogs", {
             method: "POST",

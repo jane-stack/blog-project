@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
     # POST /signup
     def create
-        user = User.create(user_params)
+        user = User.create!(user_params)
         session[:user_id] = user.id
         render json: user, status: 201 #created
     end
@@ -15,6 +15,6 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.require(:user).permit(:username, :password)
+        params.permit(:username, :password)
     end
 end

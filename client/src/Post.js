@@ -15,7 +15,7 @@ function Post({
     const showEditForm = () => setIsEditing(isEditing => !isEditing);
 
     function handleDeleteClick() {
-        fetch('/blogs/:id', {
+        fetch(`/blogs/${id}`, {
             method: "DELETE",
         });
         onPostDelete(id);

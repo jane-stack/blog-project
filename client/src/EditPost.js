@@ -20,7 +20,7 @@ function EditPost({select, isEditing, setIsEditing, onUpdatePost}) {
             description: description
         }
 
-        fetch('/blogs/:id', {
+        fetch(`/blogs/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
