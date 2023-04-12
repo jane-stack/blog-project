@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :comments, only: [:index, :create]
+  resources :comments, only: [:index, :create, :update, :destroy]
   resources :blogs, only: [:index, :create, :update, :destroy]
 
   # User

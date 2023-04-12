@@ -16,7 +16,25 @@ class CommentsController < ApplicationController
         end
     end
 
+    # PATCH /comments/:id
+    def update
+        comment = find_comment
+        comment.update(comment_params)
+        render json: comment
+    end
+
+    # DELETE /comments/:id
+    def destroy
+        comment = find_comment
+        comment.destroy
+        head :no_content
+    end
+
     private
+
+    def find_comment
+        Comment.find(params[:id])
+    end
 
     def comment_params
         params.permit(:reply, :blog_id, :user_id)
