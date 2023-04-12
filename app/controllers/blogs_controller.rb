@@ -6,6 +6,12 @@ class BlogsController < ApplicationController
         render json: @current_user.blogs.all
     end
 
+    # GET /blogs/:id
+    def show
+        blog = @current_user.blogs.find(params[:id])
+        render json: blog
+    end
+
     # POST /blogs
     def create
         blog = @current_user.blogs.create(blog_params)

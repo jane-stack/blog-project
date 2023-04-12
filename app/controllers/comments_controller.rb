@@ -2,7 +2,13 @@ class CommentsController < ApplicationController
 
     # GET /comments
     def index
-        render json: @current_user.comments.all
+        if params[:blog_id]
+            blog = @current_user.blogs.find(params[:blog_id])
+            comments = blog.comments
+        else
+            comments = Comment.all
+        end
+        render json: comments, include: :blog
     end
 
     # POST /comments

@@ -4,7 +4,7 @@ import NewPost from "./NewPost";
 
 function BlogList({user}) {
     const [posts, setPosts] = useState([]);
-    const [select, setSelect] = useState({});
+    const [select, setSelect] = useState({});    
 
 useEffect(() => {
     fetch("/blogs")
@@ -12,13 +12,13 @@ useEffect(() => {
     .then(setPosts);
 }, []);
 
+const handleAddPost = (newPost) => {
+  setPosts([...posts, newPost]);
+}
+
 // Allow us to know which post had been clicked
 const handleEditClick = (selectedPost) => {
     setSelect(selectedPost);
-  }
-
-const handleAddPost = (newPost) => {
-    setPosts([...posts, newPost]);
   }
 
   const handleUpdatedPost = (updatedPost) => {
