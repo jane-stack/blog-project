@@ -57,7 +57,7 @@ const renderBlogPosts = posts.map(post => {
     return (
         <div>
             <h1 className="top-h1">Your Blogs {user.username}</h1>
-            <ul className="scroll">
+            <ul className="ul-post">
                 {renderBlogPosts}
             </ul>
             <NewPost 

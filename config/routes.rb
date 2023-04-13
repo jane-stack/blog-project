@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
   resources :blogs do
-    resources :comments, only: [:index]
+    resources :comments, only: [:index, :show]
   end
-  resources :comments, only: [:show, :create, :destroy]
+
+  resources :comments, only: [:create]
 
   # User
   post '/signup', to: 'users#create'
