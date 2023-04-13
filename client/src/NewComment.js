@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
-function NewComment({user, isCommenting, setIsCommenting, onAddComment}) {
+function NewComment({user, onAddComment}) {
     const [reply, setReply] = useState("");
-    const closeCommentForm = () => setIsCommenting(!isCommenting);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -22,7 +21,6 @@ function NewComment({user, isCommenting, setIsCommenting, onAddComment}) {
 
         // refresh input field after submitting form
         setReply("");
-        closeCommentForm();
     }
 
     return (

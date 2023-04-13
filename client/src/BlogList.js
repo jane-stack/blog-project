@@ -6,6 +6,7 @@ function BlogList({user}) {
     const [posts, setPosts] = useState([]);
     const [select, setSelect] = useState({});  
 
+
 useEffect(() => {
     fetch("/blogs")
     .then((resp) => resp.json())
