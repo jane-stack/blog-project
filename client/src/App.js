@@ -3,10 +3,10 @@ import { Switch, Route } from "react-router-dom";
 import BlogList from "./BlogList";
 import Navbar from "./Navbar";
 import Login from "./Login";
+import Home from "./Home";
 
 function App() {
   const [user, setUser] = useState(null);
-  // const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     // auto-login
@@ -17,16 +17,6 @@ function App() {
     });
   }, [])
 
-//   useEffect(() => {
-//     fetch("/blogs")
-//     .then((resp) => resp.json())
-//     .then(setPosts);
-// }, []);
-
-  // const handleAddPost = (newPost) => {
-  //   setPosts([...posts, newPost]);
-  // }
-
   if (!user) return <Login onLogin={setUser} />
 
   return (
@@ -34,8 +24,8 @@ function App() {
     <Navbar user={user} setUser={setUser} />
       <div className="App">
         <Switch>
-          <Route exact path="/"><BlogList user={user} /></Route>
-          {/* <Route exact path="/create"><NewPost onAddPost={handleAddPost} /></Route> */}
+          <Route exact path="/"><Home /></Route>
+          <Route exact path="/blogs"><BlogList user={user} /></Route>
         </Switch>
       </div>
     </>

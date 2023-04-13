@@ -40,7 +40,7 @@ function EditPost({select, isEditing, setIsEditing, onUpdatePost}) {
         <form onSubmit={handleEditSubmit}>
             <input className="post-input" type="text" name="title" placeholder="Title of Your Post.." onChange={(e) => setTitle(e.target.value)} value={title} />
             <textarea className="post-input-description" type="text" name="description" placeholder="Start your post!" onChange={(e) => setDescription(e.target.value)} value={description} />
-            <button type="submit" className="contact-btn">DONE EDITING</button>
+            <button type="submit" className="contact-btn">UPDATE</button>
         </form>
     )
 }

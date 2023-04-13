@@ -28,11 +28,11 @@ class CommentsController < ApplicationController
     end
 
     # PATCH /comments/:id
-    def update
-        comment = find_comment
-        comment.update(comment_params)
-        render json: comment
-    end
+    # def update
+    #     comment = find_comment
+    #     comment.update(comment_params)
+    #     render json: comment
+    # end
 
     # DELETE /comments/:id
     def destroy

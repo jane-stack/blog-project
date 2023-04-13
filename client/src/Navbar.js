@@ -25,7 +25,7 @@ function NavBar({ user, setUser }) {
         <div className="navbar">
             <h1 className="title-blog">Blog Space</h1>
                 <NavLink to="/" exact style={linkStyle}>HOME</NavLink>
-                <NavLink to="create" exact style={linkStyle}>IDK</NavLink>
+                <NavLink to="blogs" exact style={linkStyle}>BLOGS</NavLink>
                 <button onClick={handleLogoutClick}>LOGOUT</button>
         </div>
     )
