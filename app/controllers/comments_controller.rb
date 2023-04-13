@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 
-    # GET /comments
+    # GET /blogs/:id/comments
     def index
         if params[:blog_id]
             blog = @current_user.blogs.find(params[:blog_id])
@@ -9,6 +9,11 @@ class CommentsController < ApplicationController
             comments = Comment.all
         end
         render json: comments, include: :blog
+    end
+
+    def show
+        comment = @current_user.comments.find(params[:id])
+        render json: comment
     end
 
     # POST /comments

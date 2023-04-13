@@ -1,13 +1,13 @@
 import React from "react";
 
-function RenderComment({comment}) {
+function RenderComment({comment, onCommentDelete}) {
     const {id, reply} = comment;
 
     function handleDeleteComment() {
         fetch(`/comments/${id}`, {
             method: "DELETE",
         });
-        console.log(id);
+        onCommentDelete(id);
     }
 
     return (

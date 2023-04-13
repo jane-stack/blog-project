@@ -23,10 +23,14 @@ function Post({
         fetch(`/blogs/${id}/comments`)
         .then(resp => resp.json())
         .then(setComments);
-      }, []);
+      }, [id]);
 
       const handleAddComment = (newReply) => {
         setComments([...comments, newReply]);
+      }
+      const handleDeleteComment = (id) => {
+        const updatedComment = comments.filter(comment => comment.id !== id);
+        setComments(updatedComment);
       }
 
     function handleDeleteClick() {
@@ -39,7 +43,7 @@ function Post({
     const handleCommentClick = () => {
         onSelectClick(post);
         return (
-            <NewComment user={user} onAddComment={handleAddComment} />
+            <NewComment user={user} isCommenting={isCommenting} setIsCommenting={setIsCommenting} onAddComment={handleAddComment} onCommentDelete={handleDeleteComment} />
         )
     }
 

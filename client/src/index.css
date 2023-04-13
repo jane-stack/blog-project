@@ -27,6 +27,14 @@ body {
   box-sizing: border-box;
 }
 
+.comment-input-description {
+  width: 100%;
+  height: 50px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
 .navbar {
   background-color: rgb(135, 135, 135);
   color: white;
@@ -78,9 +86,9 @@ body {
 
 .comment-section {
   background-color: rgb(243, 239, 235);
-  padding: 10px;
+  /* padding: 20px; */
   margin: 10px 0;
-  border-style: groove;
+  /* border-style: groove; */
 }
 
 .post-form {
