@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
   resources :blogs do
-    resources :comments, only: [:index, :show]
+    resources :comments, only: [:index]
   end
-  resources :comments, only: [:create, :destroy]
+  resources :comments, only: [:show, :create, :destroy]
 
   # User
   post '/signup', to: 'users#create'
@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   # Sessions
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+
+  # Comments
+  # post '/new', to: 'comments#create'
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Defines the root path route ("/")

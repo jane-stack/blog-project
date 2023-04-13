@@ -1,10 +1,10 @@
 import React from "react";
 
-function Home() {
+function Home({user}) {
 
     return (
         <div>
-            <h1 className="top-h1">Welcome User</h1>
+            <h1 className="home-h1">Welcome {user.username}</h1>
         </div>
     )
 }

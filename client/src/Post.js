@@ -28,6 +28,7 @@ function Post({
       const handleAddComment = (newReply) => {
         setComments([...comments, newReply]);
       }
+
       const handleDeleteComment = (id) => {
         const updatedComment = comments.filter(comment => comment.id !== id);
         setComments(updatedComment);
@@ -62,6 +63,7 @@ function Post({
                 comment={comment}
                 select={select}
                 onAddComment={handleAddComment}
+                onCommentDelete={handleDeleteComment}
             />
         )
     })

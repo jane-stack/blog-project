@@ -4,7 +4,7 @@ import NewPost from "./NewPost";
 
 function BlogList({user}) {
     const [posts, setPosts] = useState([]);
-    const [select, setSelect] = useState({});    
+    const [select, setSelect] = useState({});  
 
 useEffect(() => {
     fetch("/blogs")
@@ -41,6 +41,7 @@ const renderBlogPosts = posts.map(post => {
     return (
         <Post 
             key={post.id}
+            user={user}
             title={post.title}
             description={post.description}
             post={post}
@@ -54,7 +55,7 @@ const renderBlogPosts = posts.map(post => {
 
     return (
         <div>
-            <h1 className="top-h1">Your Blog Posts</h1>
+            <h1 className="top-h1">Your Blogs {user.username}</h1>
             <ul className="scroll">
                 {renderBlogPosts}
             </ul>

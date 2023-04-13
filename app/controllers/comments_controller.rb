@@ -16,16 +16,21 @@ class CommentsController < ApplicationController
         render json: comment
     end
 
-    # POST /comments
     def create
-        blog = @current_user.blogs.find_by(id: params[:blog_id])
-        if blog
-            comment = Comment.create!(comment_params)
-            render json: comment, status: 201
-        else
-            render json: { errors: comment.errors.full_messages }, status: 422
-        end
+        comment = @current_user.comments.create(comment_params)
+        render json: comment, status: 201
     end
+
+    # POST /comments
+    # def create
+    #     blog = @current_user.blogs.find_by(id: params[:blog_id])
+    #     if blog
+    #         comment = Comment.create(comment_params)
+    #         render json: comment, status: 201
+    #     else
+    #         render json: { errors: comment.errors.full_messages }, status: 422
+    #     end
+    # end
 
     # PATCH /comments/:id
     # def update
@@ -48,7 +53,7 @@ class CommentsController < ApplicationController
     end
 
     def comment_params
-        params.permit(:reply, :blog_id, :user_id)
+        params.permit(:reply, :user_id, :blog_id)
     end
 
 end

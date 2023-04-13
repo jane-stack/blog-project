@@ -61,8 +61,14 @@ body {
   /* display: flex; */
   /* min-height: 100vh; */
 }
+
 .top-h1 {
   text-align: center;
+}
+
+.home-h1 {
+  text-align: center;
+  color: white;
 }
 
 .scroll {

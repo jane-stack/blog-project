@@ -31,7 +31,7 @@ function NewPost({onAddPost, user}) {
             <h2>Write A New Post</h2>
             <input className="post-input" type="text" name="title" placeholder="Title of Your Post.." onChange={(e) => setTitle(e.target.value)} value={title} />
             <textarea className="post-input-description" type="textbox" name="description" placeholder="Start your post!" onChange={(e) => setDescription(e.target.value)} value={description} /><br />
-            <button type="submit" className="contact-btn">POST IT NOW</button>
+            <button type="submit" className="contact-btn">POST</button>
         </form>
     )
 }

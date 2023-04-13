@@ -24,7 +24,7 @@ function App() {
     <Navbar user={user} setUser={setUser} />
       <div className="App">
         <Switch>
-          <Route exact path="/"><Home /></Route>
+          <Route exact path="/"><Home user={user} /></Route>
           <Route exact path="/blogs"><BlogList user={user} /></Route>
         </Switch>
       </div>
