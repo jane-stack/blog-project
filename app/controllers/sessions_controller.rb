@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-    skip_before_action :authorize, only: :create
+    skip_before_action :authorize, only: [:create]
 
     # POST /login
     def create
@@ -8,13 +8,12 @@ class SessionsController < ApplicationController
             session[:user_id] = user.id
             render json: user
         else
-            render json: { errors: ["Username or Password didn't match"] }, status: 401
+            render json: { errors: ["Username or Password didn't match"] }, status: :unprocessable_entity
         end
     end
 
     # DELETE /logout
     def destroy
         session.delete :user_id
-        head :no_content
     end
 end

@@ -1,59 +1,37 @@
 class CommentsController < ApplicationController
-
-    # GET /blogs/:id/comments
-    def index
-        if params[:blog_id]
-            blog = @current_user.blogs.find(params[:blog_id])
-            comments = blog.comments
-        else
-            comments = Comment.all
-        end
-        render json: comments, include: :blog
+    before_action :find_blog
+    before_action :authorize, only: [:create]
+    before_action only: [:destroy] do
+        authorize_user_resource(@blog.user_id)
     end
 
-    def show
-        comment = @current_user.comments.find(params[:id])
-        render json: comment
-    end
-
+    # POST /blogs/:id/comments
     def create
-        comment = @current_user.comments.create(comment_params)
-        render json: comment, status: 201
+        @comment = @blog.comments.create(comment_params)
+        @comment.user = current_user
+        if @comment.save
+            render json: @comment, status: 201
+        else
+            render json: { errors: @comment.errors.full_messages }, status: :unprocessable_entity
+        end
     end
 
-    # POST /comments
-    # def create
-    #     blog = @current_user.blogs.find_by(id: params[:blog_id])
-    #     if blog
-    #         comment = Comment.create(comment_params)
-    #         render json: comment, status: 201
-    #     else
-    #         render json: { errors: comment.errors.full_messages }, status: 422
-    #     end
-    # end
-
-    # PATCH /comments/:id
-    # def update
-    #     comment = find_comment
-    #     comment.update(comment_params)
-    #     render json: comment
-    # end
-
-    # DELETE /comments/:id
+    # DESTROY /blogs/:id/comments/:id
     def destroy
-        comment = find_comment
-        comment.destroy
-        head :no_content
+        @comment = @blog.comments.find(params[:id])
+        @comment.destroy
+        render json: @comment
     end
+
 
     private
 
-    def find_comment
-        Comment.find(params[:id])
+    def comment_params
+        params.require(:comment).permit(:reply)
     end
 
-    def comment_params
-        params.permit(:reply, :user_id, :blog_id)
+    def find_blog
+        @blog = Blog.find(params[:blog_id])
     end
 
 end

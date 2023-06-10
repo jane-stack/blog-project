@@ -12,6 +12,7 @@ function Comment({comment, onCommentDelete}) {
 
     return (
         <div className="comment-section">
+            <p>{ comment.user.username }</p>
             <p>{reply}</p>
             <button className="delete-btn" onClick={handleDeleteClick}>✘</button>
             <hr />

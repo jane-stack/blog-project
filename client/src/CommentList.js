@@ -35,6 +35,7 @@ function CommentList({post, user, isCommenting, setIsCommenting}) {
                 reply={comment.reply}
                 comment={comment}
                 onCommentDelete={handleDeleteComment}
+                user={user}
                 // onSelectCommented={handleCommentClick}
             />
         )
@@ -47,6 +48,7 @@ function CommentList({post, user, isCommenting, setIsCommenting}) {
                 onAddComment={handleAddComment} 
                 isCommenting={isCommenting}
                 setIsCommenting={setIsCommenting}
+                post={post}
                 />
             <h3>Comments</h3>
             {renderComments}

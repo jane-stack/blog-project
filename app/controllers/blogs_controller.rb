@@ -1,48 +1,51 @@
 class BlogsController < ApplicationController
-    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+    before_action :find_blog, only: [:update, :destroy]
+    before_action :unprocessable_entity_if_not_found, only: [:update, :destroy]
+    skip_before_action :authorize, only: [:index]
+    before_action only: [:update, :destroy] do
+        authorize_user_resource(@blog.user_id)
+    end
 
-    # GET /blogs
     def index
-        render json: @current_user.blogs.all
+        if params[:user_id]
+            user = User.find_by_id(params[:user_id])
+            @blogs = user.blogs
+        else
+            @blogs = Blog.all
+        end
+        render json: @blogs
     end
 
-    # GET /blogs/:id
-    def show
-        blog = @current_user.blogs.find(params[:id])
-        render json: blog
-    end
-
-    # POST /blogs
     def create
-        blog = @current_user.blogs.create(blog_params)
-        render json: blog, status: 201
+        blog = current_user.blogs.create(blog_params)
+        if blog.valid?
+            render json: blog
+        else
+            render json: { errors: blog.errors.full_messages }, status: :unprocessable_entity
+        end
     end
 
-    # PATCH /blogs/:id
     def update
-        blog = find_blog
-        blog.update(blog_params)
-        render json: blog
+        @blog.update(blog_params)
+        render json: @blog, include: [:author]
     end
 
-    # DESTROY /blogs/:id
     def destroy
-        blog = find_blog
-        blog.destroy
-        head :no_content
+        @blog.destroy
+        render json: @blog
     end
 
     private
-
-    def render_not_found_response
-        render json: { errors: "Blog not found" }, status: 404 # not_found
-    end
-    
-    def find_blog
-        Blog.find(params[:id])
-    end
-
     def blog_params
         params.require(:blog).permit(:title, :description)
     end
+
+    def find_blog
+        @blog = Blog.find_by_id(params[:id])
+    end
+
+    def unprocessable_entity_if_not_found
+        render json: { message: "Blog not found" }, status: :unprocessable_entity unless @blog
+    end
+
 end

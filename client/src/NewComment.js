@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-function NewComment({user, onAddComment}) {
+function NewComment({user, onAddComment, post}) {
     const [reply, setReply] = useState("");
 
     function handleSubmit(e) {
         e.preventDefault();
         const newReply = {
             reply: reply,
-            user_id: user.id
+            blog_id: post.id
         }
         fetch("/comments", {
             method: "POST",
